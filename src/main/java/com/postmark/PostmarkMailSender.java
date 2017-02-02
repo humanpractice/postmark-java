@@ -149,7 +149,7 @@ public class PostmarkMailSender implements MailSender {
                         theResponse.status = PostmarkResponseStatus.SERVERERROR;
                         throw new MailSendException("Postmark returned: "+theResponse);
                     default:
-                        logger.log(Level.SEVERE, "There has been an unknow error sending your email: " + hre.getMessage());
+                        logger.log(Level.SEVERE, "There has been an unknown error sending your email: " + hre.getMessage());
                         theResponse.status = PostmarkResponseStatus.UNKNOWN;
                         theResponse.setMessage(hre.getMessage());
                         throw new MailSendException("Postmark returned: "+theResponse);

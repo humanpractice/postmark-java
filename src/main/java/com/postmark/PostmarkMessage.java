@@ -1,6 +1,7 @@
 // The MIT License
 //
 // Copyright (c) 2010 Jared Holdcroft
+// Copyright (c) 2017 Human Practice, Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +38,7 @@ import org.springframework.mail.SimpleMailMessage;
  * Wrapper class for Postmark message
  */
 public class PostmarkMessage extends SimpleMailMessage {
-	
+
 	private String tag;
 
 	private String htmlBody;
@@ -57,7 +58,4 @@ public class PostmarkMessage extends SimpleMailMessage {
 	public void setHtmlBody(String htmlBody) {
 		this.htmlBody = htmlBody;
 	}
-
 }
-
-

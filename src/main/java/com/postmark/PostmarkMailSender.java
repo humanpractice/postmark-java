@@ -1,6 +1,7 @@
 // The MIT License
 //
 // Copyright (c) 2010 Jared Holdcroft
+// Copyright (c) 2017 Human Practice, Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +26,8 @@
  * This library can be used to leverage the postmarkapp.com functionality from a Java client
  * <p/>
  *
- * https://github.com/Imaginatio/postmark-java
- * forked from https://github.com/bitformed/postmark-java
+ * https://github.com/humanpractice/postmark-java
+ * forked from https://github.com/Imaginatio/postmark-java
  */
 
 package com.postmark;
@@ -67,17 +68,17 @@ import com.postmark.util.UnicodeEscapeFilterWriter;
 
 /**
  * PostMark client implementation of Spring's MailSender.
- * 
+ *
  * This implementation opens one HTTP request per mail sent,
  * that could be improved by re-using a pool of HTTP connections.
- * 
+ *
  * @see http://postmarkapp.com
  * @see MailSender
  */
 public class PostmarkMailSender implements MailSender {
 
     private static Logger logger = Logger.getLogger("com.postmark");
-    
+
     private String serverToken;
     private static Gson gson;
 
@@ -159,12 +160,10 @@ public class PostmarkMailSender implements MailSender {
         } catch (Exception e) {
             logger.log(Level.SEVERE, "There has been an error sending email: " + e.getMessage());
             throw new MailSendException("There has been an error sending email", e);
-        
+
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
-
-		
 	}
 
 	@Override
@@ -181,11 +180,11 @@ public class PostmarkMailSender implements MailSender {
 		if(! failedMessages.isEmpty())
 			throw new MailSendException(failedMessages);
 	}
-	
-	
-	
+
+
+
 	//  PostMark Reponse utilities
-	
+
 	/**
 	 * Possible outcomes of a Response from the Postmark server
 	 */
@@ -259,19 +258,19 @@ public class PostmarkMailSender implements MailSender {
 	        this.errorCode = errorCode;
 	    }
 	}
-	
-	
-	
+
+
+
 	//  GSON Serializers
-	
+
 	/**
 	 * Gson Serializer for Spring's SimpleMailMessage
-	 * 
+	 *
 	 * @see JsonSerializer
 	 * @see SimpleMailMessage
 	 */
 	static class SimpleMailMessageAdapter implements JsonSerializer<SimpleMailMessage> {
-		
+
 		@Override
 		public JsonElement serialize(SimpleMailMessage src, Type typeOfSrc, JsonSerializationContext context) {
 			JsonObject jsonO = new JsonObject();
@@ -321,7 +320,7 @@ public class PostmarkMailSender implements MailSender {
 
 			return jsonO;
 		}
-		
+
 		private static String mergeMailAddresses(String[] addresses) {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < addresses.length; i++) {
@@ -334,10 +333,10 @@ public class PostmarkMailSender implements MailSender {
 		}
 
 	}
-	
+
 	/**
 	 * Gson Serializer for Joda DateTime
-	 * 
+	 *
 	 * @see JsonSerializer
 	 * @see DateTime
 	 */
